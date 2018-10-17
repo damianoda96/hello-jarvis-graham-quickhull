@@ -16,6 +16,7 @@
 #include "graham.hpp"
 #include "jarvis.hpp"
 #include <vector>
+#include <chrono>
 
 //TODO: FIND WAY TO MEASURE RUNTIME OF FUNCTIONS FOR ADDITIONAL WORKSHEET
 
@@ -44,20 +45,44 @@ int main(int argc, char *argv[])
             //call your Graham Scan algorithm to solve the problem
             
             outputFile = "hull_G.txt";
+            
+            std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
         
             g_convexHull(points, points.size(), outputFile);
+            
+            std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+            
+            int duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+            
+            std::cout << duration << std::endl;
         }
         else if (algType == "J") {
             //call your Javis March algorithm to solve the problem
             outputFile = "hull_J.txt";
             
+            std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+            
             j_convexHull(points, points.size(), outputFile);
+            
+            std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+            
+            int duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+            
+            std::cout << duration << std::endl;
         }
         else { //default
             //call your Quickhull algorithm to solve the problem
             outputFile = "hull_Q.txt";
             
+            std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+            
             q_printHull(points, points.size(), outputFile);
+            
+            std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+            
+            int duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+            
+            std::cout << duration << std::endl;
         }
         
         //write your convex hull to the outputFile (see class example for the format)
